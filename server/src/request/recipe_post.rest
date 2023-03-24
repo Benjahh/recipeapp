@@ -1,0 +1,13 @@
+POST http://localhost:3001/recipes
+Content-Type: application/json
+
+{
+    "name": "steak",
+    "description": "example",
+    "ingredients": ["example", "example"],
+    "instructions": "example",
+    "imageURL": "example",
+    "cookingTime": 1,
+    "userOwner": "641cc45c61a9f2346eb12a43"
+
+}

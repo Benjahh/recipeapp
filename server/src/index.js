@@ -1,13 +1,25 @@
-import express from 'express'
-import cors from 'cors'
-import mongoose from 'mongoose'
+import express from "express"
+import cors from "cors"
+import mongoose from "mongoose"
+import { userRouter } from "./routes/users.js"
+import { recipesRouter } from "./routes/recipes.js"
 
 const app = express()
-mongoose.connect('mongodb+srv://benjah:<password>@cluster0.qr5gjpr.mongodb.net/test')
-.then(() => console.log('connected to server'))
-.catch(() => console.log('error no connection'))
 
 app.use(express.json())
 app.use(cors())
 
-app.listen(3001, () => console.log('server started!'))
+app.use("/auth", userRouter)
+app.use("/recipes", recipesRouter)
+
+mongoose.connect(
+  "mongodb+srv://lucas:CLAMclam1@recipedb.ekipodl.mongodb.net/recipesDB?retryWrites=true&w=majority",
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  }
+)
+.then(() => console.log("connected to mongoose"))
+.catch((error) => {console.log(error)})
+
+app.listen(3001, () => console.log("Server started"))
